@@ -32,6 +32,10 @@ spec:
           volumeMounts:
           - mountPath: /etc/kubernetes
             name: etckubernetes
+          env:
+          # We need at least one GO environment variable to allow the Google Cloud Code VS Code extension to detect that it is a Go program.
+          - name: GOTRACEBACK
+            value: all
       hostNetwork: false
       hostPID: false
       volumes:
