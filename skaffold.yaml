@@ -1,0 +1,19 @@
+apiVersion: skaffold/v2beta10
+kind: Config
+metadata:
+  name: scheduler-plugins-debug
+build:
+  artifacts:
+    - image: 'localhost:5000/scheduler-plugins/kube-scheduler'
+      context: .
+      docker:
+        dockerfile: build/scheduler/Dockerfile.debug
+        buildArgs:
+          RELEASE_VERSION: 20201223-v1.0.0
+  tagPolicy:
+    sha256: {}
+deploy:
+  kubectl:
+    manifests:
+      - manifests/scheduler-deployment/service-account.yaml
+      - manifests/scheduler-deployment/scheduler.yaml

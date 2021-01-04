@@ -1,0 +1,22 @@
+{
+    "configurations": [
+        {
+            "name": "Kubernetes: Run/Debug",
+            "type": "cloudcode.kubernetes",
+            "request": "launch",
+            "skaffoldConfig": "${workspaceFolder}/skaffold.yaml",
+            "watch": false,
+            "cleanUp": true,
+            "portForward": true,
+            "imageRegistry": "localhost:5000",
+            "debug": [
+                {
+                    "image": "localhost:5000/scheduler-plugins/kube-scheduler",
+                    "sourceFileMap": {
+                        "${workspaceFolder}": "/bin"
+                    }
+                }
+            ]
+        }
+    ]
+}
