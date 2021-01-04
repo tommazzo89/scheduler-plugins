@@ -15,6 +15,7 @@ spec:
         component: scheduler
         tier: control-plane
     spec:
+      serviceAccountName: test-scheduler
       nodeSelector:
         node-role.kubernetes.io/master: ""
       containers:
@@ -24,11 +25,14 @@ spec:
           - /bin/kube-scheduler
           - --authentication-kubeconfig=/etc/kubernetes/scheduler.conf
           - --authorization-kubeconfig=/etc/kubernetes/scheduler.conf
-          - --config=/etc/kubernetes/configs/scheduler-config.yaml
+          - --address=0.0.0.0
+          - --leader-elect=false
+          - --scheduler-name=test-scheduler
+          # - --config=/etc/kubernetes/configs/scheduler-config.yaml
           - -v=9
           name: schedulingplugin
           securityContext:
-            privileged: true
+            privileged: false
           volumeMounts:
           - mountPath: /etc/kubernetes
             name: etckubernetes

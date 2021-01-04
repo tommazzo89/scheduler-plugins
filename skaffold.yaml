@@ -15,4 +15,5 @@ build:
 deploy:
   kubectl:
     manifests:
+      - manifests/scheduler-deployment/service-account.yaml
       - manifests/scheduler-deployment/scheduler.yaml
